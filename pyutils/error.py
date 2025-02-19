@@ -32,6 +32,10 @@ def split_once(s: str, delimiter: str = ":"):
     return parts[0].strip(), parts[1].strip()
 
 
+def stacktrace_dict() -> dict[str, Any]:
+    return asdict(stacktrace_details())
+
+
 # e.g. log.error(*stacktrace_details())
 def stacktrace_entry() -> tuple[str, dict[str, Any]]:
     details = stacktrace_details()
@@ -43,6 +47,10 @@ def error_details(ex: Exception) -> ErrorDetails:
     exc_info = sys.exc_info()
     trace = traceback.format_exception(*exc_info)
     return ErrorDetails(ex.__class__.__name__, message, "".join(trace))
+
+
+def error_dict(ex: Exception) -> dict[str, Any]:
+    return asdict(error_details(ex))
 
 
 # e.g. log.error(*error_details(e))
