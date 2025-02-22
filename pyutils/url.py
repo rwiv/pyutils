@@ -1,3 +1,4 @@
+import re
 from urllib.parse import urlparse
 
 
@@ -12,6 +13,18 @@ def get_origin_url(url: str) -> str:
     return f"{parsed_rul.scheme}://{parsed_rul.netloc}"
 
 
+def strip_origin(url: str) -> str:
+    match = re.match(r"https://[^/]+(/.*)", url)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Invalid URL")
+
+
 def get_query_string(url: str) -> str:
     parsed_rul = urlparse(url)
     return parsed_rul.query
+
+
+def strip_query_string(url: str) -> str:
+    return url.split("?")[0]

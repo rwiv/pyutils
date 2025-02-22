@@ -34,6 +34,13 @@ def filename(file_path: str, delimiter: str = "/") -> str:
     return file_path.split(delimiter)[-1]
 
 
+def get_ext(file_path: str) -> str:
+    chunks = file_path.split(".")
+    if len(chunks) == 1:
+        return ""
+    return chunks[-1]
+
+
 def sanitize_filename(file_name: str) -> str:
     return (
         file_name.replace("?", "？")

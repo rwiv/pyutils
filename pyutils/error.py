@@ -9,7 +9,7 @@ class ErrorDetails:
     type: str
     message: str
     stacktrace: str
-    
+
 
 def stacktrace() -> str:
     exc_info = sys.exc_info()

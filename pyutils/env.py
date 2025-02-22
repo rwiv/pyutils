@@ -2,6 +2,10 @@ import os
 
 
 def load_dot_env(file_path: str):
+    load_dotenv(file_path)
+
+
+def load_dotenv(file_path: str):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"The file '{file_path}' does not exist.")
 

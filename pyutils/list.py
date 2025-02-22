@@ -1,7 +1,10 @@
-from typing import TypeVar
+from typing import TypeVar, Callable
 
 T = TypeVar("T")
 
 
-def sublist(lst: list[T], size: int) -> list[list[T]]:
-    return [lst[i : i + size] for i in range(0, len(lst), size)]
+def find_elem[T](lst: list, cond: Callable[[T], bool]) -> T | None:
+    for item in lst:
+        if cond(item):
+            return item
+    return None
