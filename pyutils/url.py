@@ -14,11 +14,13 @@ def get_origin_url(url: str) -> str:
 
 
 def strip_origin(url: str) -> str:
-    match = re.match(r"https://[^/]+(/.*)", url)
-    if match:
-        return match.group(1)
-    else:
-        raise ValueError("Invalid URL")
+    parsed_url = urlparse(url)
+    path_with_query = parsed_url.path
+    if parsed_url.query:
+        path_with_query += "?" + parsed_url.query
+    if path_with_query == "" or path_with_query == "/":
+        raise ValueError(f"Invalid URL: {url}")
+    return path_with_query
 
 
 def get_query_string(url: str) -> str:
