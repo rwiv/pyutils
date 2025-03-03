@@ -45,7 +45,7 @@ def get_msg_prod(level: str, message: str, attrs: dict[str, Any] | None) -> str:
         for key, value in attrs.items():
             record[key] = value
 
-    return json.dumps(record)
+    return json.dumps(record, ensure_ascii=False)
 
 
 def get_msg_dev(level: str, msg: str, attrs: dict[str, Any] | None) -> str:
@@ -57,7 +57,7 @@ def get_msg_dev(level: str, msg: str, attrs: dict[str, Any] | None) -> str:
     if attrs is None:
         return f"{t} {level} {m}"
     else:
-        a = f"{WHITE_DIMMED}{json.dumps(attrs, indent=2)}{RESET}"
+        a = f"{WHITE_DIMMED}{json.dumps(attrs, indent=2, ensure_ascii=False)}{RESET}"
         return f"{t} {level} {m} {a}"
 
 
