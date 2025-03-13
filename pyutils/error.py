@@ -7,7 +7,7 @@ from typing import Any
 @dataclass
 class ErrorDetails:
     type: str
-    message: str
+    head: str
     stacktrace: str
 
 
@@ -39,7 +39,7 @@ def stacktrace_dict() -> dict[str, Any]:
 # e.g. log.error(*stacktrace_details())
 def stacktrace_entry() -> tuple[str, dict[str, Any]]:
     details = stacktrace_details()
-    return details.message, asdict(details)
+    return details.head, asdict(details)
 
 
 def error_details(ex: Exception) -> ErrorDetails:
@@ -56,4 +56,4 @@ def error_dict(ex: Exception) -> dict[str, Any]:
 # e.g. log.error(*error_details(e))
 def error_entry(ex: Exception) -> tuple[str, dict[str, Any]]:
     details = error_details(ex)
-    return details.message, asdict(details)
+    return details.head, asdict(details)
