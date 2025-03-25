@@ -38,17 +38,12 @@ def split_path(path: str) -> tuple[str, ...]:
     return Path(path).parts
 
 
-def get_ext(file_path: str) -> str:
-    chunks = file_path.split(".")
-    if len(chunks) == 1:
-        return ""
-    return chunks[-1]
-
-
-def get_ext_nullable(file_path: str) -> str | None:
+def get_ext(file_path: str) -> str | None:
     chunks = file_path.split(".")
     if len(chunks) == 1:
         return None
+    if chunks[-1] == "":
+        raise ValueError("Invalid file path")
     return chunks[-1]
 
 

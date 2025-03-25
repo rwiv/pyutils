@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from pyutils import dirpath, path_join, filename, get_ext
 
 
@@ -19,5 +21,6 @@ def test_join():
 
 def test_ext():
     assert get_ext("a/b/c.txt") == "txt"
-    assert get_ext("a/b/c") == ""
-    assert get_ext("a/b/c.") == ""
+    assert get_ext("a/b/c") is None
+    with pytest.raises(ValueError):
+        get_ext("a/b/c.")
