@@ -1,12 +1,15 @@
-from pyutils import dirname, path_join, filename, get_ext
+from pathlib import Path
+
+from pyutils import dirpath, path_join, filename, get_ext
 
 
 def test_dirname():
-    assert dirname("a/b/c.txt") == "a/b"
+    assert dirpath("a\\b/c.txt") == "a/b"
 
 
 def test_filename():
-    assert filename("a/b/c.txt") == "c.txt"
+    assert filename("a/b\\c.txt") == "c.txt"
+    print(Path("a\\b/c.txt").parts)
 
 
 def test_join():

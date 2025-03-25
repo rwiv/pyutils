@@ -26,18 +26,29 @@ def path_join(*paths: Any, delimiter: str = "/") -> str:
     return delimiter.join(cleaned_paths)
 
 
-def dirname(file_path: str, delimiter: str = "/") -> str:
-    return delimiter.join(file_path.split(delimiter)[:-1])
+def dirpath(file_path: str, delimiter: str = "/") -> str:
+    return delimiter.join(split_path(file_path)[:-1])
 
 
-def filename(file_path: str, delimiter: str = "/") -> str:
-    return file_path.split(delimiter)[-1]
+def filename(file_path: str) -> str:
+    return Path(file_path).name
+
+
+def split_path(path: str) -> tuple[str, ...]:
+    return Path(path).parts
 
 
 def get_ext(file_path: str) -> str:
     chunks = file_path.split(".")
     if len(chunks) == 1:
         return ""
+    return chunks[-1]
+
+
+def get_ext_nullable(file_path: str) -> str | None:
+    chunks = file_path.split(".")
+    if len(chunks) == 1:
+        return None
     return chunks[-1]
 
 
