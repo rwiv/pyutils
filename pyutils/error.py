@@ -42,18 +42,18 @@ def stacktrace_entry() -> tuple[str, dict[str, Any]]:
     return details.head, asdict(details)
 
 
-def error_details(ex: Exception) -> ErrorDetails:
+def error_details(ex: BaseException) -> ErrorDetails:
     message = str(ex)
     exc_info = sys.exc_info()
     trace = traceback.format_exception(*exc_info)
     return ErrorDetails(ex.__class__.__name__, message, "".join(trace))
 
 
-def error_dict(ex: Exception) -> dict[str, Any]:
+def error_dict(ex: BaseException) -> dict[str, Any]:
     return asdict(error_details(ex))
 
 
 # e.g. log.error(*error_details(e))
-def error_entry(ex: Exception) -> tuple[str, dict[str, Any]]:
+def error_entry(ex: BaseException) -> tuple[str, dict[str, Any]]:
     details = error_details(ex)
     return details.head, asdict(details)
