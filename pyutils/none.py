@@ -4,7 +4,7 @@ from typing import TypeVar
 T = TypeVar("T")
 
 
-def not_null(
+def not_none(
     value: T | None,
     key_name: str = "Value",
     default: T | None = None,
