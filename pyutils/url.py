@@ -30,8 +30,20 @@ def strip_query_string(url: str) -> str:
     return url.replace(f"?{urlparse(url).query}", "")
 
 
-def to_query_string(params: dict[str, list[str]]) -> str:
-    return urlencode(params, doseq=True)
+def to_query_string(params: dict[str, list[str]], url_encode: bool = True) -> str:
+    if url_encode:
+        return urlencode(params, doseq=True)
+
+    result = ""
+    is_first = True
+    for key, values in params.items():
+        for value in values:
+            if not is_first:
+                result += "&"
+            result += f"{key}={value}"
+            if is_first:
+                is_first = False
+    return result
 
 
 def parse_query_params(url: str) -> dict[str, list[str]]:
