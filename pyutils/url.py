@@ -1,5 +1,4 @@
-import re
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs, urlencode
 
 
 def get_base_url(url: str) -> str:
@@ -24,9 +23,16 @@ def strip_origin(url: str) -> str:
 
 
 def get_query_string(url: str) -> str:
-    parsed_rul = urlparse(url)
-    return parsed_rul.query
+    return urlparse(url).query
 
 
 def strip_query_string(url: str) -> str:
-    return url.split("?")[0]
+    return urlparse(url).query[0]
+
+
+def to_query_string(params: dict[str, list[str]]) -> str:
+    return urlencode(params, doseq=True)
+
+
+def parse_query_params(url: str) -> dict[str, list[str]]:
+    return parse_qs(urlparse(url).query)

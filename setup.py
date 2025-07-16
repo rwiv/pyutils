@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyutils",
-    version="0.2.5",
+    version="0.2.6",
     description="A collection of utility functions for Python.",
     long_description=long_description,
     long_description_content_type="text/markdown",
