@@ -1,6 +1,6 @@
 import pytest
 
-from pyutils import strip_origin, parse_query_params, to_query_string
+from pyutils import strip_origin, parse_query_params, to_query_string, strip_query_string
 
 
 def test_strip_origin():
@@ -8,6 +8,7 @@ def test_strip_origin():
     assert len(params) == 3
     assert to_query_string(params) == "category=book&category=ebook&q=python+programming&lang=ko"
     assert strip_origin("https://example.com/path/to/resource") == "/path/to/resource"
+    assert strip_query_string("http://foo.com?asd=bvc&z?xc=qwe") == "http://foo.com"
     assert (
         strip_origin("http://sub.domain.com/another/path?key=value&name=test")
         == "/another/path?key=value&name=test"

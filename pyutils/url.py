@@ -27,7 +27,7 @@ def get_query_string(url: str) -> str:
 
 
 def strip_query_string(url: str) -> str:
-    return urlparse(url).query[0]
+    return url.replace(f"?{urlparse(url).query}", "")
 
 
 def to_query_string(params: dict[str, list[str]]) -> str:
