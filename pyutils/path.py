@@ -44,6 +44,10 @@ def filename(file_path: str) -> str:
     return Path(file_path).name
 
 
+def stem(file_path: str) -> str:
+    return Path(file_path).stem
+
+
 def split_path(path: str) -> tuple[str, ...]:
     return Path(path).parts
 
