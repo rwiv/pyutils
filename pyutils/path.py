@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 
 def find_project_root():
@@ -10,12 +10,19 @@ def find_project_root():
     return current_path
 
 
-def path_join(*paths: Any, delimiter: str = "/") -> str:
+def path_join(*paths: Union[str, int, float, None], delimiter: str = "/") -> str:
     cleaned_paths = []
     for i, p in enumerate(paths):
+        if p is None:
+            continue
+
+        if not isinstance(p, (str, int, float)):
+            raise TypeError(f"Invalid path type: {type(p)}")
+
+        p = str(p)
         if not p:
             continue
-        p = str(p)
+
         if i == 0:
             cleaned_paths.append(p.rstrip(delimiter))
         elif i == len(paths) - 1:
