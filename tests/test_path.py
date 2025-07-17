@@ -37,8 +37,8 @@ def test_path_join():
     # 인자가 없는 엣지 케이스 테스트
     assert fn() == ""
 
-    # 다양한 자료형(str, int, float) 혼합 테스트
-    assert fn("path", 1, "to", 2.5, "file") == "path/1/to/2.5/file"
+    # 다양한 자료형 혼합 테스트
+    assert fn("foo", Path("path", "1", "to"), 2.5, "file") == "foo/path/1/to/2.5/file"
     assert fn(2025, "year", 7, 17.0) == "2025/year/7/17.0"
 
     # 사용자 지정 구분자 테스트
